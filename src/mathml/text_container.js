@@ -63,12 +63,15 @@ function textContainer(element, targetParent, previousSibling, nextSibling, ance
           }
         ]
       }
-      if (style.variant !== 'italic') {
+      // Variants without a ST_Style mapping (normal, fraktur, …) fall back to
+      // plain — emitting a literal "undefined" would be schema-invalid.
+      const styleValue = STYLES[style.variant] || 'p'
+      if (styleValue !== 'i') {
         mrPr.children.push({
           name: 'm:sty',
           type: 'tag',
           attribs: {
-            'm:val': STYLES[style.variant]
+            'm:val': styleValue
           },
           children: []
         })

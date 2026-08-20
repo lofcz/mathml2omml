@@ -1,8 +1,10 @@
 import * as entities from 'entities'
 
-const attrRE = /\s([^'"/\s><]+?)[\s/>]|([^\s=]+)=\s?(".*?"|'.*?')/g
+// Multi-line attribute values: quoted parts use [^"]* / [^']* (not lazy .*?)
+// so values containing newlines parse correctly (html-parse-stringify#63).
+const attrRE = /\s([^'"/\s><]+?)[\s/>]|([^\s=]+)=\s?("[^"]*"|'[^']*')/g
 
-export default function stringify(tag, options = {}) {
+export default function parseTag(tag, options = {}) {
   const res = {
     type: 'tag',
     name: '',
@@ -14,6 +16,8 @@ export default function stringify(tag, options = {}) {
   const tagMatch = tag.match(/<\/?([^\s]+?)[/\s>]/)
   if (tagMatch) {
     res.name = tagMatch[1]
+    // XML adaptation: only explicitly self-closed tags are void — there is no
+    // HTML void-element list (br, img, …) in MathML/OMML.
     if (tag.charAt(tag.length - 2) === '/') {
       res.voidElement = true
     }

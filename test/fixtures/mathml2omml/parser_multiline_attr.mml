@@ -1,0 +1,8 @@
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+  <mrow>
+    <mi mathvariant="normal" title="a
+multi-line title with 1 &lt; 2 inside">x</mi>
+    <mo>+</mo>
+    <mn>1</mn>
+  </mrow>
+</math>
