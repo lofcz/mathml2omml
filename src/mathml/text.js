@@ -1,5 +1,8 @@
 export function text(element, targetParent, previousSibling, nextSibling, ancestors) {
-  let text = element.data.replace(/[\u2062]|[\u200B]/g, '')
+  // Strip invisible operators (U+2061 function application, U+2062 invisible
+  // times, U+2063 invisible separator, U+2064 invisible plus) and zero-width
+  // spaces — Word renders them as unexpected boxes inside equations.
+  let text = element.data.replace(/[\u2061-\u2064\u200B]/g, '')
   if (ancestors.find((element) => ['mi', 'mn', 'mo'].includes(element.name))) {
     text = text.replace(/\s/g, '')
   } else {

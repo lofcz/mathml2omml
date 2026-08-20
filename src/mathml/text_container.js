@@ -114,9 +114,10 @@ function textContainer(element, targetParent, previousSibling, nextSibling, ance
     }
 
     if (element.children.length < 1) {
+      // Zero-width space placeholder; stringify emits it as &#x200B;
       targetElement.children.push({
         type: 'text',
-        data: '&#x200B;'
+        data: '\u200B'
       })
     }
 

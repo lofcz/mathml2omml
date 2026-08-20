@@ -1208,6 +1208,26 @@ exports[`Can produce OOML from joe_java/sophomores_dream.mml 1`] = `
 </m:oMath>"
 `;
 
+exports[`Can produce OOML from mathml2omml/escaping.mml 1`] = `
+"<m:oMath xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
+    <m:r>
+        <m:t xml:space="preserve">F&lt;G</m:t>
+    </m:r>
+    <m:r>
+        <m:rPr>
+            <m:nor/>
+        </m:rPr>
+        <m:t xml:space="preserve">a&amp;bx&lt;br/&gt;y</m:t>
+    </m:r>
+    <m:r>
+        <m:rPr>
+            <m:sty m:val="p"/>
+        </m:rPr>
+        <m:t xml:space="preserve">&lt;s&amp;</m:t>
+    </m:r>
+</m:oMath>"
+`;
+
 exports[`Can produce OOML from mathml2omml/groupchr.mml 1`] = `
 "<m:oMath xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
     <m:groupChr>
@@ -1220,6 +1240,14 @@ exports[`Can produce OOML from mathml2omml/groupchr.mml 1`] = `
             </m:r>
         </m:e>
     </m:groupChr>
+</m:oMath>"
+`;
+
+exports[`Can produce OOML from mathml2omml/invisible_chars.mml 1`] = `
+"<m:oMath xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
+    <m:r>
+        <m:t xml:space="preserve">f(x)gh</m:t>
+    </m:r>
 </m:oMath>"
 `;
 
@@ -1463,6 +1491,56 @@ exports[`Can produce OOML from mathml2omml/menclose.mml 1`] = `
 </m:oMath>"
 `;
 
+exports[`Can produce OOML from mathml2omml/mfrac_variants.mml 1`] = `
+"<m:oMath xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
+    <m:f>
+        <m:fPr>
+            <m:type m:val="noBar"/>
+        </m:fPr>
+        <m:num>
+            <m:r>
+                <m:t xml:space="preserve">n</m:t>
+            </m:r>
+        </m:num>
+        <m:den>
+            <m:r>
+                <m:t xml:space="preserve">k</m:t>
+            </m:r>
+        </m:den>
+    </m:f>
+    <m:f>
+        <m:fPr>
+            <m:type m:val="skw"/>
+        </m:fPr>
+        <m:num>
+            <m:r>
+                <m:t xml:space="preserve">1</m:t>
+            </m:r>
+        </m:num>
+        <m:den>
+            <m:r>
+                <m:t xml:space="preserve">2</m:t>
+            </m:r>
+        </m:den>
+    </m:f>
+    <m:f>
+        <m:fPr>
+            <m:type m:val="bar"/>
+        </m:fPr>
+        <m:num>
+            <m:r>
+                <m:t xml:space="preserve">3</m:t>
+            </m:r>
+        </m:num>
+        <m:den>
+            <m:r>
+                <m:t xml:space="preserve">4</m:t>
+            </m:r>
+        </m:den>
+    </m:f>
+</m:oMath>"
+`;
+
 exports[`Can produce OOML from mathml2omml/ms.mml 1`] = `
 "<m:oMath xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
     <m:r>
@@ -1479,6 +1557,24 @@ exports[`Can produce OOML from mathml2omml/ms.mml 1`] = `
             <m:nor/>
         </m:rPr>
         <m:t xml:space="preserve">text</m:t>
+    </m:r>
+</m:oMath>"
+`;
+
+exports[`Can produce OOML from mathml2omml/mspace_linebreak.mml 1`] = `
+"<m:oMath xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
+    <m:r>
+        <m:t xml:space="preserve">a=1</m:t>
+    </m:r>
+    <m:br/>
+    <m:r>
+        <m:t xml:space="preserve">b=2</m:t>
+    </m:r>
+    <m:r>
+        <m:t xml:space="preserve"> </m:t>
+    </m:r>
+    <m:r>
+        <m:t xml:space="preserve">c</m:t>
     </m:r>
 </m:oMath>"
 `;
@@ -1506,6 +1602,74 @@ exports[`Can produce OOML from mathml2omml/mstyle.mml 1`] = `
     <m:r>
         <m:t xml:space="preserve">+2=4</m:t>
     </m:r>
+</m:oMath>"
+`;
+
+exports[`Can produce OOML from mathml2omml/mtable_ragged.mml 1`] = `
+"<m:oMath xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
+    <m:m>
+        <m:mPr>
+            <m:baseJc m:val="center"/>
+            <m:plcHide m:val="on"/>
+            <m:mcs>
+                <m:mc>
+                    <m:mcPr>
+                        <m:count m:val="3"/>
+                        <m:mcJc m:val="center"/>
+                    </m:mcPr>
+                </m:mc>
+            </m:mcs>
+        </m:mPr>
+        <m:mr>
+            <m:e>
+                <m:r>
+                    <m:t xml:space="preserve">1</m:t>
+                </m:r>
+            </m:e>
+            <m:e>
+                <m:r>
+                    <m:t xml:space="preserve">2</m:t>
+                </m:r>
+            </m:e>
+            <m:e>
+                <m:r>
+                    <m:t xml:space="preserve">3</m:t>
+                </m:r>
+            </m:e>
+        </m:mr>
+        <m:mr>
+            <m:e>
+                <m:r>
+                    <m:t xml:space="preserve">4</m:t>
+                </m:r>
+            </m:e>
+            <m:e/>
+            <m:e/>
+        </m:mr>
+    </m:m>
+</m:oMath>"
+`;
+
+exports[`Can produce OOML from mathml2omml/semantics_annotation.mml 1`] = `
+"<m:oMath xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
+    <m:r>
+        <m:t xml:space="preserve">E=m</m:t>
+    </m:r>
+    <m:sSup>
+        <m:sSupPr>
+            <m:ctrlPr/>
+        </m:sSupPr>
+        <m:e>
+            <m:r>
+                <m:t xml:space="preserve">c</m:t>
+            </m:r>
+        </m:e>
+        <m:sup>
+            <m:r>
+                <m:t xml:space="preserve">2</m:t>
+            </m:r>
+        </m:sup>
+    </m:sSup>
 </m:oMath>"
 `;
 

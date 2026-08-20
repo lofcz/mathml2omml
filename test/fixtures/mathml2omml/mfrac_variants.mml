@@ -1,0 +1,16 @@
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+  <mrow>
+    <mfrac linethickness="0pt">
+      <mi>n</mi>
+      <mi>k</mi>
+    </mfrac>
+    <mfrac bevelled="true">
+      <mn>1</mn>
+      <mn>2</mn>
+    </mfrac>
+    <mfrac>
+      <mn>3</mn>
+      <mn>4</mn>
+    </mfrac>
+  </mrow>
+</math>

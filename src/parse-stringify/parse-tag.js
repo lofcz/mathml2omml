@@ -1,6 +1,8 @@
+import * as entities from 'entities'
+
 const attrRE = /\s([^'"/\s><]+?)[\s/>]|([^\s=]+)=\s?(".*?"|'.*?')/g
 
-export default function stringify(tag) {
+export default function stringify(tag, options = {}) {
   const res = {
     type: 'tag',
     name: '',
@@ -50,7 +52,9 @@ export default function stringify(tag) {
       res.attribs[arr[0]] = arr[1]
       reg.lastIndex--
     } else if (result[2]) {
-      res.attribs[result[2]] = result[3].trim().substring(1, result[3].length - 1)
+      const value = result[3].trim().substring(1, result[3].length - 1)
+      // Store attributes decoded, like text nodes — stringify re-encodes both.
+      res.attribs[result[2]] = options.disableDecode ? value : entities.decodeXML(value)
     }
   }
 

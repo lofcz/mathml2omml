@@ -1,0 +1,73 @@
+name: Release and Publish to npm
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_type:
+        description: Release type
+        required: true
+        default: patch
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+
+# npm Trusted Publisher must list this exact filename: release.yml
+# Do not publish from a laptop. OIDC only works on GitHub-hosted runners.
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      id-token: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: "24"
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Require npm 11.5.1+ for OIDC
+        run: |
+          npm install -g npm@latest
+          node -e "const [maj, min, pat] = require('child_process').execFileSync('npm', ['--version'], { encoding: 'utf8' }).trim().split('.').map(Number); if (maj < 11 || (maj === 11 && min < 5) || (maj === 11 && min === 5 && pat < 1)) { console.error('npm >= 11.5.1 is required for trusted publishing'); process.exit(1) }"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Test
+        run: npm test
+
+      - name: Bump package version
+        id: version
+        run: |
+          npm version "${{ github.event.inputs.release_type }}" --no-git-tag-version
+          echo "version=$(node -p "require('./package.json').version")" >> "$GITHUB_OUTPUT"
+
+      # prepublishOnly runs lint + rollup build + type copy before publish.
+      # Trusted publishing generates provenance attestations by default.
+      - name: Publish to npm
+        run: npm publish --access public
+
+      - name: Commit release version and create tag
+        run: |
+          git config --local user.name "github-actions[bot]"
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add package.json
+          git commit -m "chore: release v${{ steps.version.outputs.version }}"
+          git tag -a "v${{ steps.version.outputs.version }}" -m "Release v${{ steps.version.outputs.version }}"
+
+      - name: Push release commit and tag
+        run: git push --follow-tags
+
+      - name: Create GitHub release
+        uses: softprops/action-gh-release@v3
+        with:
+          tag_name: v${{ steps.version.outputs.version }}
+          generate_release_notes: true

@@ -1,6 +1,10 @@
 import * as mathmlHandlers from './mathml/index.js'
 import { addScriptlevel } from './ooml/index.js'
 
+// Content of these elements must never reach the output: <annotation> carries
+// the source form (e.g. raw LaTeX) which would otherwise leak as math text.
+const SKIPPED_SUBTREES = ['annotation', 'annotation-xml']
+
 export function walker(
   element,
   targetParent,
@@ -8,6 +12,9 @@ export function walker(
   nextSibling = false,
   ancestors = []
 ) {
+  if (SKIPPED_SUBTREES.includes(element.name)) {
+    return
+  }
   if (
     !previousSibling &&
     ['m:deg', 'm:den', 'm:e', 'm:fName', 'm:lim', 'm:num', 'm:sub', 'm:sup'].includes(

@@ -24,7 +24,7 @@ export function parse(html, options = {}) {
     let parent
 
     if (isComment) {
-      const comment = parseTag(tag)
+      const comment = parseTag(tag, options)
 
       // if we're at root, push new base node
       if (level < 0) {
@@ -39,7 +39,7 @@ export function parse(html, options = {}) {
     if (isOpen) {
       level++
 
-      current = parseTag(tag)
+      current = parseTag(tag, options)
       if (current.type === 'tag' && options.components?.[current.name]) {
         current.type = 'component'
       }

@@ -1,5 +1,12 @@
 export function mtable(element, targetParent, previousSibling, nextSibling, ancestors) {
-  const cellsPerRowCount = Math.max(...element.children.map((row) => row.children.length))
+  const cellsPerRowCount = Math.max(0, ...element.children.map((row) => row.children.length))
+  // Pad ragged rows with empty cells so every m:mr matches the m:count
+  // declared in m:mcs (placeholders stay hidden via m:plcHide).
+  for (const row of element.children) {
+    while (row.children?.length < cellsPerRowCount) {
+      row.children.push({ name: 'mtd', type: 'tag', attribs: {}, children: [] })
+    }
+  }
   const targetElement = {
     name: 'm:m',
     type: 'tag',

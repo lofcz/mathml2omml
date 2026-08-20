@@ -24,7 +24,15 @@ export function mfrac(element, targetParent, previousSibling, nextSibling, ances
   ancestors.unshift(element)
   walker(numerator, numeratorTarget, false, false, ancestors)
   walker(denumerator, denumeratorTarget, false, false, ancestors)
-  const fracType = element.attribs?.linethickness === '0' ? 'noBar' : 'bar'
+  // linethickness zero in any unit ("0", "0pt", "0.0") hides the fraction bar;
+  // bevelled fractions map to the OMML "skewed" type.
+  const linethickness = element.attribs?.linethickness?.trim()
+  const fracType =
+    linethickness !== undefined && /^0+(\.0*)?([a-z%]+)?$/i.test(linethickness)
+      ? 'noBar'
+      : element.attribs?.bevelled === 'true'
+        ? 'skw'
+        : 'bar'
   targetParent.children.push({
     type: 'tag',
     name: 'm:f',

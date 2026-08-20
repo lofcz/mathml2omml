@@ -1,0 +1,10 @@
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+  <mrow>
+    <mi>F</mi>
+    <mo>&lt;</mo>
+    <mi>G</mi>
+    <mtext>a&amp;b</mtext>
+    <mtext>x&lt;br/&gt;y</mtext>
+    <ms lquote="&lt;" rquote="&amp;">s</ms>
+  </mrow>
+</math>

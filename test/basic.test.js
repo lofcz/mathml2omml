@@ -30,7 +30,7 @@ for (const fixture of mathfiles) {
   const ofixture = `${fixture.slice(0, -4)}.omml`
   const mml = readFileSync(fixture, 'utf8')
   const omml = existsSync(ofixture) ? readFileSync(ofixture, 'utf8') : false
-  examples.push({ fixture: fixture.slice(fixtures.length + 1), mml, omml })
+  examples.push({ fixture: fixture.slice(fixtures.length + 1).replaceAll('\\', '/'), mml, omml })
 }
 
 test.each(examples)('Can produce OOML from $fixture', ({ fixture, mml, omml }) => {
