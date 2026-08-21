@@ -1,6 +1,6 @@
 {
   "name": "mathml2omml-plus",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "description": "a MathML to OMML converter (maintained fork of mathml2omml with XML escaping fixes)",
   "main": "./dist/index.js",
   "type": "module",
