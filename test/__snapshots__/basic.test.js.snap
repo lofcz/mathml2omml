@@ -1582,7 +1582,9 @@ exports[`Can produce OOML from mathml2omml/mspace_linebreak.mml 1`] = `
     <m:r>
         <m:t xml:space="preserve">a=1</m:t>
     </m:r>
-    <m:br/>
+    <m:r>
+        <m:t xml:space="preserve"> </m:t>
+    </m:r>
     <m:r>
         <m:t xml:space="preserve">b=2</m:t>
     </m:r>
