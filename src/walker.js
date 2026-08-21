@@ -1,3 +1,7 @@
+/**
+ * Walk MathML into an OMML tree. `annotation` / `annotation-xml` are dropped so
+ * source LaTeX cannot leak into `m:t`. Newlines attach `m:brk` (ECMA-376 §7.1.2.15).
+ */
 import * as mathmlHandlers from './mathml/index.js'
 import { wrapLastChildInBreakBox } from './mathml/mspace.js'
 import { addScriptlevel } from './ooml/index.js'

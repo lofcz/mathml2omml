@@ -1,3 +1,4 @@
+/** `<munderover>` → `m:nary` (§7.1.2.70) or nested `m:limUpp`/`m:limLow` (§7.1.2.56 / §7.1.2.54). */
 import { getNary, getNaryTarget } from '../ooml/index.js'
 import { walker } from '../walker.js'
 

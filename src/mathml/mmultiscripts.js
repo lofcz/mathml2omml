@@ -1,3 +1,7 @@
+/**
+ * `<mmultiscripts>` → post `m:sSub`/`m:sSup`/`m:sSubSup` (§7.1.2.101 / §7.1.2.105 / §7.1.2.103)
+ * and pre `m:sPre` (§7.1.2.99).
+ */
 import { walker } from '../walker.js'
 
 export function mmultiscripts(element, targetParent, previousSibling, nextSibling, ancestors) {

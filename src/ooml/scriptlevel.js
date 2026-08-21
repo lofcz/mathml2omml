@@ -1,3 +1,4 @@
+/** First child of an OMML argument may carry `m:argPr`/`m:scrLvl` (ECMA-376 §7.1.2.5 / §7.1.2.6). */
 export function addScriptlevel(target, ancestors) {
   const scriptlevel = ancestors.find((ancestor) => ancestor.attribs?.scriptlevel)?.attribs
     ?.scriptlevel

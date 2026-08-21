@@ -167,7 +167,7 @@ exports[`Can produce OOML from joe_java/boolean_algebra.mml 1`] = `
                         <m:naryPr>
                             <m:chr m:val="⋃"/>
                             <m:limLoc m:val="undOvr"/>
-                            <m:grow m:val="1"/>
+                            <m:grow m:val="on"/>
                             <m:subHide m:val="off"/>
                             <m:supHide m:val="off"/>
                         </m:naryPr>
@@ -210,7 +210,7 @@ exports[`Can produce OOML from joe_java/boolean_algebra.mml 1`] = `
         <m:naryPr>
             <m:chr m:val="⋂"/>
             <m:limLoc m:val="undOvr"/>
-            <m:grow m:val="1"/>
+            <m:grow m:val="on"/>
             <m:subHide m:val="off"/>
             <m:supHide m:val="off"/>
         </m:naryPr>
@@ -268,14 +268,16 @@ exports[`Can produce OOML from joe_java/complex_number.mml 1`] = `
         <m:e>
             <m:groupChr>
                 <m:groupChrPr>
-                    <m:chr m:val="⏞" m:pos="top"/>
+                    <m:chr m:val="⏞"/>
+                    <m:pos m:val="top"/>
                 </m:groupChrPr>
                 <m:e>
                     <m:limLow>
                         <m:e>
                             <m:groupChr>
                                 <m:groupChrPr>
-                                    <m:chr m:val="⏟" m:pos="bot"/>
+                                    <m:chr m:val="⏟"/>
+                                    <m:pos m:val="bot"/>
                                 </m:groupChrPr>
                                 <m:e>
                                     <m:r>
@@ -306,7 +308,8 @@ exports[`Can produce OOML from joe_java/complex_number.mml 1`] = `
                         <m:e>
                             <m:groupChr>
                                 <m:groupChrPr>
-                                    <m:chr m:val="⏟" m:pos="bot"/>
+                                    <m:chr m:val="⏟"/>
+                                    <m:pos m:val="bot"/>
                                 </m:groupChrPr>
                                 <m:e>
                                     <m:r>
@@ -1112,7 +1115,7 @@ exports[`Can produce OOML from joe_java/sophomores_dream.mml 1`] = `
         <m:naryPr>
             <m:chr m:val="∫"/>
             <m:limLoc m:val="subSup"/>
-            <m:grow m:val="1"/>
+            <m:grow m:val="on"/>
             <m:subHide m:val="off"/>
             <m:supHide m:val="off"/>
         </m:naryPr>
@@ -1150,7 +1153,7 @@ exports[`Can produce OOML from joe_java/sophomores_dream.mml 1`] = `
         <m:naryPr>
             <m:chr m:val="∑"/>
             <m:limLoc m:val="undOvr"/>
-            <m:grow m:val="1"/>
+            <m:grow m:val="on"/>
             <m:subHide m:val="off"/>
             <m:supHide m:val="off"/>
         </m:naryPr>
@@ -1232,7 +1235,8 @@ exports[`Can produce OOML from mathml2omml/groupchr.mml 1`] = `
 "<m:oMath xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
     <m:groupChr>
         <m:groupChrPr>
-            <m:chr m:val="b" m:pos="bot"/>
+            <m:chr m:val="b"/>
+            <m:pos m:val="bot"/>
         </m:groupChrPr>
         <m:e>
             <m:r>

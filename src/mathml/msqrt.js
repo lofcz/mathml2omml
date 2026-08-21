@@ -1,3 +1,4 @@
+/** `<msqrt>` → `m:rad` with `m:degHide val="on"` and empty `m:deg` (ECMA-376 §7.1.2.88, §7.1.2.27). */
 export function msqrt(element, targetParent, previousSibling, nextSibling, ancestors) {
   const targetElement = {
     name: 'm:e',

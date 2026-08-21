@@ -1,3 +1,4 @@
+/** Resolve MathML style onto `m:rPr` (`m:sty` ST_Style §7.1.3.14, `m:nor` §7.1.2.74). */
 import { getTextContent } from '../helpers.js'
 
 export function getStyle(element, ancestors, previousStyle = {}) {

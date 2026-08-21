@@ -1,3 +1,7 @@
+/**
+ * `<mtable>` → `m:m` (ECMA-376 §7.1.2.60); rows `m:mr` (§7.1.2.69), cells `m:e` (§7.1.2.32).
+ * Ragged rows are padded so every `m:mr` matches `m:mcs`/`m:count` (§7.1.2.64).
+ */
 export function mtable(element, targetParent, previousSibling, nextSibling, ancestors) {
   const cellsPerRowCount = Math.max(0, ...element.children.map((row) => row.children.length))
   // Pad ragged rows with empty cells so every m:mr matches the m:count

@@ -1,3 +1,8 @@
+/**
+ * `<munder>`/`<mover>` → `m:nary` (§7.1.2.70), `m:bar` (§7.1.2.7), `m:acc` (§7.1.2.1),
+ * `m:groupChr` (§7.1.2.41), or `m:limLow`/`m:limUpp` (§7.1.2.54 / §7.1.2.56).
+ * `m:chr` is CT_Char (`m:val` only, §7.1.2.20); `m:pos` is a sibling (ST_TopBot §7.1.3.15).
+ */
 import { getNary, getNaryTarget } from '../ooml/index.js'
 import { walker } from '../walker.js'
 
@@ -229,8 +234,15 @@ function underOrOver(element, targetParent, previousSibling, nextSibling, ancest
               type: 'tag',
               name: 'm:chr',
               attribs: {
-                'm:val': scriptText,
-                'm:pos': direction === 'under' ? 'bot' : 'top'
+                'm:val': scriptText
+              },
+              children: []
+            },
+            {
+              type: 'tag',
+              name: 'm:pos',
+              attribs: {
+                'm:val': direction === 'under' ? 'bot' : 'top'
               },
               children: []
             }

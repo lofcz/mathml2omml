@@ -1,3 +1,4 @@
+/** Character data for `m:t` (ECMA-376 §7.1.2.116). Invisible operators are stripped so they do not become boxes. */
 export function text(element, targetParent, previousSibling, nextSibling, ancestors) {
   // Strip invisible operators (U+2061 function application, U+2062 invisible
   // times, U+2063 invisible separator, U+2064 invisible plus) and zero-width

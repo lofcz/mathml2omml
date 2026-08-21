@@ -1,3 +1,8 @@
+/**
+ * N-ary operator → `m:nary` (ECMA-376 §7.1.2.70).
+ * `m:limLoc` ∈ ST_LimLoc §7.1.3.8 (`subSup` | `undOvr`).
+ * `m:grow` / `m:subHide` / `m:supHide` ∈ ST_OnOff §7.1.3.9 (`on` | `off`).
+ */
 import { getTextContent } from '../helpers.js'
 
 const NARY_REGEXP = /^[\u220f-\u2211]|[\u2229-\u2233]|[\u22c0-\u22c3]$/
@@ -15,7 +20,13 @@ export function getNary(node) {
 export function getNaryTarget(naryChar, element, type, subHide = false, supHide = false) {
   const stretchy = element.attribs?.stretchy
   const grow =
-    stretchy === 'true' ? '1' : stretchy === 'false' ? '0' : GROW_REGEXP.test(naryChar) ? '1' : '0'
+    stretchy === 'true'
+      ? 'on'
+      : stretchy === 'false'
+        ? 'off'
+        : GROW_REGEXP.test(naryChar)
+          ? 'on'
+          : 'off'
   return {
     type: 'tag',
     name: 'm:nary',

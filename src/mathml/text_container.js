@@ -1,3 +1,7 @@
+/**
+ * Token elements → `m:r` / `m:t` (ECMA-376 §7.1.2.87 / §7.1.2.116).
+ * `m:sty` is ST_Style §7.1.3.14 (`p|b|i|bi`); `m:nor` is §7.1.2.74.
+ */
 import { PENDING_BRK, consumePendingBrk } from './mspace.js'
 import { getStyle } from './text_style.js'
 

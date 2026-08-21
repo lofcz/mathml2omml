@@ -1,3 +1,8 @@
+/**
+ * MathML → Office Math (`m:oMath`, ECMA-376 Part 1 §7.1.2.77).
+ * PowerPoint host (MS-PPTX §2.2.8) must wrap the result in `a14:m`
+ * ([MS-ODRAWXML] 2.3.1.11). See STANDARDS.md.
+ */
 import { parse, stringifyDoc } from './parse-stringify'
 import { walker } from './walker.js'
 

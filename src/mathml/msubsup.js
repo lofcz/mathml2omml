@@ -1,3 +1,4 @@
+/** `<msubsup>` → `m:sSubSup` (ECMA-376 §7.1.2.103) or `m:nary` (§7.1.2.70) when the base is n-ary. */
 import { getNary, getNaryTarget } from '../ooml/index.js'
 import { walker } from '../walker.js'
 

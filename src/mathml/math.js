@@ -1,3 +1,4 @@
+/** MathML `<math>` → `m:oMath` (ECMA-376 §7.1.2.77). Host wraps `a14:m` (MS-PPTX §2.2.8). */
 export function math(element, targetParent, previousSibling, nextSibling, ancestors) {
   targetParent.name = 'm:oMath'
   targetParent.attribs = {
@@ -9,7 +10,7 @@ export function math(element, targetParent, previousSibling, nextSibling, ancest
   return targetParent
 }
 
+/** `<semantics>` unwraps; walker skips `annotation` / `annotation-xml`. */
 export function semantics(element, targetParent, previousSibling, nextSibling, ancestors) {
-  // Ignore as default behavior
   return targetParent
 }

@@ -1,3 +1,7 @@
+/**
+ * `<menclose>` → `m:rad` (longdiv) or `m:borderBox` (ECMA-376 §7.1.2.11)
+ * with hide* (§7.1.2.44–47) / strike* (§7.1.2.107–110).
+ */
 export function menclose(element, targetParent, previousSibling, nextSibling, ancestors) {
   const type = element.attribs?.notation?.split(' ')[0] || 'longdiv'
 

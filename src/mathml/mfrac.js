@@ -1,3 +1,7 @@
+/**
+ * MathML `<mfrac>` → `m:f` (ECMA-376 §7.1.2.36) with `m:num` (§7.1.2.75) /
+ * `m:den` (§7.1.2.28). `m:type@val` is ST_FType §7.1.3.4: bar | skw | lin | noBar.
+ */
 import { walker } from '../walker.js'
 
 export function mfrac(element, targetParent, previousSibling, nextSibling, ancestors) {

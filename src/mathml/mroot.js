@@ -1,3 +1,4 @@
+/** `<mroot>` → `m:rad` / `m:deg` / `m:e` (ECMA-376 §7.1.2.88, §7.1.2.26). */
 import { getTextContent } from '../helpers.js'
 import { walker } from '../walker.js'
 
