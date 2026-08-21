@@ -3,7 +3,7 @@
  * ECMA-376 §7.1 (see ecma-schema.test.js for the transcribed rules).
  * Corpus = fika's shipped formula/symbol configs + termo.pptx equations.
  */
-import { convertLatexToMathMl } from '../../fika/node_modules/mathlive/mathlive-ssr.min.mjs'
+import { convertLatexToMathMl } from '@lofcz/mathlive/ssr'
 import { mml2omml } from '../src/index.js'
 import { validateOmml, wrapMathMl } from './ecma-schema-helper.js'
 
