@@ -1583,9 +1583,9 @@ exports[`Can produce OOML from mathml2omml/mspace_linebreak.mml 1`] = `
         <m:t xml:space="preserve">a=1</m:t>
     </m:r>
     <m:r>
-        <m:t xml:space="preserve"> </m:t>
-    </m:r>
-    <m:r>
+        <m:rPr>
+            <m:brk/>
+        </m:rPr>
         <m:t xml:space="preserve">b=2</m:t>
     </m:r>
     <m:r>
@@ -1594,6 +1594,36 @@ exports[`Can produce OOML from mathml2omml/mspace_linebreak.mml 1`] = `
     <m:r>
         <m:t xml:space="preserve">c</m:t>
     </m:r>
+</m:oMath>"
+`;
+
+exports[`Can produce OOML from mathml2omml/mspace_linebreak_frac.mml 1`] = `
+"<m:oMath xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
+    <m:r>
+        <m:t xml:space="preserve">a</m:t>
+    </m:r>
+    <m:box>
+        <m:boxPr>
+            <m:brk/>
+        </m:boxPr>
+        <m:e>
+            <m:f>
+                <m:fPr>
+                    <m:type m:val="bar"/>
+                </m:fPr>
+                <m:num>
+                    <m:r>
+                        <m:t xml:space="preserve">b</m:t>
+                    </m:r>
+                </m:num>
+                <m:den>
+                    <m:r>
+                        <m:t xml:space="preserve">c</m:t>
+                    </m:r>
+                </m:den>
+            </m:f>
+        </m:e>
+    </m:box>
 </m:oMath>"
 `;
 

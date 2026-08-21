@@ -1,4 +1,5 @@
 import * as mathmlHandlers from './mathml/index.js'
+import { wrapLastChildInBreakBox } from './mathml/mspace.js'
 import { addScriptlevel } from './ooml/index.js'
 
 // Content of these elements must never reach the output: <annotation> carries
@@ -63,6 +64,7 @@ export function walker(
         element.children[i + 1],
         ancestors
       )
+      wrapLastChildInBreakBox(targetElement)
     }
   }
 }

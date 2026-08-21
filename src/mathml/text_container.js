@@ -1,3 +1,4 @@
+import { PENDING_BRK, consumePendingBrk } from './mspace.js'
 import { getStyle } from './text_style.js'
 
 const STYLES = {
@@ -25,7 +26,7 @@ function textContainer(element, targetParent, previousSibling, nextSibling, ance
     textType === previousSibling?.name ||
     (['mi', 'mn', 'mo'].includes(textType) && ['mi', 'mn', 'mo'].includes(previousSibling?.name))
   let targetElement
-  if (sameGroup && styleSame && !hasMglyphChild) {
+  if (sameGroup && styleSame && !hasMglyphChild && !targetParent[PENDING_BRK]) {
     const rElement = targetParent.children[targetParent.children.length - 1]
     targetElement = rElement.children[rElement.children.length - 1]
   } else {
@@ -124,6 +125,7 @@ function textContainer(element, targetParent, previousSibling, nextSibling, ance
       })
     }
 
+    consumePendingBrk(targetParent, rElement)
     rElement.children.push(targetElement)
     targetParent.children.push(rElement)
   }
