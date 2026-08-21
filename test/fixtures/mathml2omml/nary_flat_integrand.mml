@@ -1,0 +1,20 @@
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+  <mrow>
+    <msubsup>
+      <mo>∫</mo>
+      <msub>
+        <mi>V</mi>
+        <mn>1</mn>
+      </msub>
+      <msub>
+        <mi>V</mi>
+        <mn>2</mn>
+      </msub>
+    </msubsup>
+    <mi>p</mi>
+    <mo>&#8290;</mo>
+    <mi>d</mi>
+    <mo>&#8290;</mo>
+    <mi>V</mi>
+  </mrow>
+</math>

@@ -25,8 +25,8 @@ export function munderover(element, targetParent, previousSibling, nextSibling, 
   const naryChar = getNary(base)
   if (
     naryChar &&
-    element.attributes?.accent?.toLowerCase() !== 'true' &&
-    element.attributes?.accentunder?.toLowerCase() !== 'true'
+    element.attribs?.accent?.toLowerCase() !== 'true' &&
+    element.attribs?.accentunder?.toLowerCase() !== 'true'
   ) {
     const topTarget = getNaryTarget(naryChar, element, 'undOvr')
     element.isNary = true

@@ -8,6 +8,19 @@ import { getTextContent } from '../helpers.js'
 const NARY_REGEXP = /^[\u220f-\u2211]|[\u2229-\u2233]|[\u22c0-\u22c3]$/
 const GROW_REGEXP = /^\u220f|\u2211|[\u2229-\u222b]|\u222e|\u222f|\u2232|\u2233|[\u22c0-\u22c3]$/
 
+/**
+ * If `parent`'s last child is `m:nary`, return its base `m:e` (§7.1.2.32).
+ * Following siblings of an n-ary operator are the operand, not mixed content
+ * on `m:oMath` / `m:e` (CT_OMathArg = `argPr` + EG_OMathElements + `ctrlPr`).
+ */
+export function naryBaseArg(parent) {
+  const children = parent?.children
+  if (!children?.length) return null
+  const last = children[children.length - 1]
+  if (last?.name !== 'm:nary') return null
+  return last.children[last.children.length - 1] || null
+}
+
 export function getNary(node) {
   // Check if node contains only a nary operator.
   const text = getTextContent(node)

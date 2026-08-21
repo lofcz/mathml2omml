@@ -28,7 +28,12 @@ export function msup(element, targetParent, previousSibling, nextSibling, ancest
   ) {
     topTarget = getNaryTarget(naryChar, element, 'subSup', true)
     element.isNary = true
-    topTarget.children.push({ type: 'tag', name: 'm:sub' })
+    topTarget.children.push({
+      type: 'tag',
+      name: 'm:sub',
+      attribs: {},
+      children: []
+    })
   } else {
     const baseTarget = {
       name: 'm:e',

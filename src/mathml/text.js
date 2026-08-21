@@ -1,3 +1,31 @@
+/**
+ * Character data may appear only in `m:t` (ECMA-376 §7.1.2.116), whose sole
+ * math parent is `m:r` (§7.1.2.87). `m:e` is `CT_OMathArg` (§7.1.2.32):
+ * `argPr` + `EG_OMathElements` + `ctrlPr` — no mixed content.
+ */
+export function ensureMathTextTarget(targetParent) {
+  if (targetParent?.name === 'm:t') return targetParent
+  if (!Array.isArray(targetParent.children)) targetParent.children = []
+  const last = targetParent.children[targetParent.children.length - 1]
+  if (last?.name === 'm:r') {
+    const t = last.children[last.children.length - 1]
+    if (t?.name === 'm:t') return t
+  }
+  const t = {
+    name: 'm:t',
+    type: 'tag',
+    attribs: { 'xml:space': 'preserve' },
+    children: []
+  }
+  targetParent.children.push({
+    name: 'm:r',
+    type: 'tag',
+    attribs: {},
+    children: [t]
+  })
+  return t
+}
+
 /** Character data for `m:t` (ECMA-376 §7.1.2.116). Invisible operators are stripped so they do not become boxes. */
 export function text(element, targetParent, previousSibling, nextSibling, ancestors) {
   // Strip invisible operators (U+2061 function application, U+2062 invisible
@@ -13,17 +41,16 @@ export function text(element, targetParent, previousSibling, nextSibling, ancest
     }
   }
   if (text.length) {
-    if (
-      targetParent.children.length &&
-      targetParent.children[targetParent.children.length - 1].type === 'text'
-    ) {
-      targetParent.children[targetParent.children.length - 1].data += text
+    const dest = ensureMathTextTarget(targetParent)
+    if (dest.children.length && dest.children[dest.children.length - 1].type === 'text') {
+      dest.children[dest.children.length - 1].data += text
     } else {
-      targetParent.children.push({
+      dest.children.push({
         type: 'text',
         data: text
       })
     }
+    return dest
   }
   return targetParent
 }

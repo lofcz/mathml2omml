@@ -19,11 +19,13 @@ Do **not** emit Word-only run inner content (`w:br` / a fictional `m:br`). `m:r`
 | `<mi>` `<mn>` `<mo>` `<mtext>` `<ms>` | `m:r` / `m:t` (+ optional `m:rPr`) | §7.1.2.87, §7.1.2.116, §7.1.2.91 |
 | `mathvariant` / font style | `m:sty@val` ∈ `p\|b\|i\|bi` | §7.1.2.111, ST_Style §7.1.3.14 |
 | `mathvariant` “normal text” | `m:nor` | §7.1.2.74 |
+| styled run children | `m:rPr` (nor XOR sty) before optional `w:rPr` | CT_R §7.1.2.87, CT_RPr §7.1.2.91 choice |
 | scriptlevel on first arg child | `m:argPr` / `m:scrLvl` | §7.1.2.5, §7.1.2.6 |
 | `<mfrac>` | `m:f` / `m:num` / `m:den` / `m:type` | §7.1.2.36, §7.1.2.75, §7.1.2.28, ST_FType §7.1.3.4 (`bar\|skw\|lin\|noBar`) |
 | `<msub>` | `m:sSub` or `m:nary` | §7.1.2.101, §7.1.2.70 |
 | `<msup>` | `m:sSup` or `m:nary` | §7.1.2.105, §7.1.2.70 |
 | `<msubsup>` | `m:sSubSup` or `m:nary` | §7.1.2.103, §7.1.2.70 |
+| siblings after n-ary | fill `m:e` as `EG_OMathElements` (`m:r` / …), never mixed text | §7.1.2.32 `CT_OMathArg`, §7.1.2.87, §7.1.2.116 |
 | n-ary limits location | `m:limLoc` ∈ `subSup\|undOvr` | ST_LimLoc §7.1.3.8 |
 | n-ary grow / hide | `m:grow` `m:subHide` `m:supHide` ∈ `on\|off` | ST_OnOff §7.1.3.9 — **not** `0`/`1` |
 | `<msqrt>` | `m:rad` + `m:degHide val="on"` + empty `m:deg` | §7.1.2.88, §7.1.2.27 |

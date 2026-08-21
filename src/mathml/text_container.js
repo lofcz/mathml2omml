@@ -2,6 +2,7 @@
  * Token elements → `m:r` / `m:t` (ECMA-376 §7.1.2.87 / §7.1.2.116).
  * `m:sty` is ST_Style §7.1.3.14 (`p|b|i|bi`); `m:nor` is §7.1.2.74.
  */
+import { naryBaseArg } from '../ooml/index.js'
 import { PENDING_BRK, consumePendingBrk } from './mspace.js'
 import { getStyle } from './text_style.js'
 
@@ -12,9 +13,10 @@ const STYLES = {
 }
 
 function textContainer(element, targetParent, previousSibling, nextSibling, ancestors, textType) {
+  if (!Array.isArray(targetParent.children)) targetParent.children = []
   if (previousSibling.isNary) {
-    const previousSiblingTarget = targetParent.children[targetParent.children.length - 1]
-    targetParent = previousSiblingTarget.children[previousSiblingTarget.children.length - 1]
+    const e = naryBaseArg(targetParent)
+    if (e) targetParent = e
   }
 
   const hasMglyphChild = element.children?.find((element) => element.name === 'mglyph')
@@ -30,8 +32,17 @@ function textContainer(element, targetParent, previousSibling, nextSibling, ance
     textType === previousSibling?.name ||
     (['mi', 'mn', 'mo'].includes(textType) && ['mi', 'mn', 'mo'].includes(previousSibling?.name))
   let targetElement
-  if (sameGroup && styleSame && !hasMglyphChild && !targetParent[PENDING_BRK]) {
-    const rElement = targetParent.children[targetParent.children.length - 1]
+  const lastChild = targetParent.children[targetParent.children.length - 1]
+  // Only append into an existing math run. Reusing `m:nary` / `m:e` here used
+  // to dump character data into `m:e` (illegal CT_OMathArg / §7.1.2.32).
+  if (
+    sameGroup &&
+    styleSame &&
+    !hasMglyphChild &&
+    !targetParent[PENDING_BRK] &&
+    lastChild?.name === 'm:r'
+  ) {
+    const rElement = lastChild
     targetElement = rElement.children[rElement.children.length - 1]
   } else {
     const rElement = {
@@ -42,6 +53,30 @@ function textContainer(element, targetParent, previousSibling, nextSibling, ance
     }
 
     if (style.variant) {
+      // CT_R (§7.1.2.87): m:rPr precedes the WordprocessingML w:rPr group.
+      const mrPr = {
+        name: 'm:rPr',
+        type: 'tag',
+        attribs: {},
+        children: []
+      }
+      // CT_RPr (§7.1.2.91) is nor XOR EG_ScriptStyle(sty) — never both.
+      // Variants without a ST_Style mapping (normal, fraktur, …) use plain
+      // text (nor); the rest carry only sty.
+      const styleValue = STYLES[style.variant]
+      if (styleValue) {
+        mrPr.children.push({
+          name: 'm:sty',
+          type: 'tag',
+          attribs: {
+            'm:val': styleValue
+          },
+          children: []
+        })
+      } else {
+        mrPr.children.push({ name: 'm:nor', type: 'tag', attribs: {}, children: [] })
+      }
+      rElement.children.push(mrPr)
       const wrPr = {
         name: 'w:rPr',
         type: 'tag',
@@ -54,34 +89,7 @@ function textContainer(element, targetParent, previousSibling, nextSibling, ance
       if (style.variant.includes('italic')) {
         wrPr.children.push({ name: 'w:i', type: 'tag', attribs: {}, children: [] })
       }
-      rElement.children.push(wrPr)
-      const mrPr = {
-        name: 'm:rPr',
-        type: 'tag',
-        attribs: {},
-        children: [
-          {
-            name: 'm:nor',
-            type: 'tag',
-            attribs: {},
-            children: []
-          }
-        ]
-      }
-      // Variants without a ST_Style mapping (normal, fraktur, …) fall back to
-      // plain — emitting a literal "undefined" would be schema-invalid.
-      const styleValue = STYLES[style.variant] || 'p'
-      if (styleValue !== 'i') {
-        mrPr.children.push({
-          name: 'm:sty',
-          type: 'tag',
-          attribs: {
-            'm:val': styleValue
-          },
-          children: []
-        })
-      }
-      rElement.children.push(mrPr)
+      if (wrPr.children.length) rElement.children.push(wrPr)
     } else if (hasMglyphChild || textType === 'mtext') {
       rElement.children.push({
         name: 'm:rPr',

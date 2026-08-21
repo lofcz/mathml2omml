@@ -1,9 +1,10 @@
-/** `<mrow>` is transparent (no OMML grouping). After `m:nary`, children fill the empty `m:e`. */
+import { naryBaseArg } from '../ooml/index.js'
+
+/** `<mrow>` is transparent (no OMML grouping). After `m:nary`, that row fills `m:e` (§7.1.2.32). */
 export function mrow(element, targetParent, previousSibling, nextSibling, ancestors) {
   if (previousSibling.isNary) {
-    const targetSibling = targetParent.children[targetParent.children.length - 1]
-    return targetSibling.children[targetSibling.children.length - 1]
+    const e = naryBaseArg(targetParent)
+    if (e) return e
   }
-  // Ignore as default behavior
   return targetParent
 }
